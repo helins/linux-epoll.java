@@ -3,6 +3,12 @@ package io.dvlopt.linux.epoll ;
 
 
 
+/**
+ * Enum for specifying the type of data stored in an EpollEvent.
+ * <p>
+ * This data is set by the user and when the even occurs, the kernel will
+ * give it back.
+ */
 public enum EpollDataType {
 
 
@@ -17,7 +23,7 @@ public enum EpollDataType {
     String fieldType ;
 
 
-    EpollDataType( String fieldType ) {
+    private EpollDataType( String fieldType ) {
     
         this.fieldType = fieldType ;
     }

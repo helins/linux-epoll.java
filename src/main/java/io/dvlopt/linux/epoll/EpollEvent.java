@@ -8,23 +8,43 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 
+/**
+ * An EpollEvent specifies the type of event the kernel should monitor, or did respond to, 
+ * and allows the user to store some basic data such as a file descriptor and get it back 
+ * later when the even occurs.
+ */
 public class EpollEvent {
 
 
     NativeEpollEvent nativeStruct ;
 
 
+
+
+    /**
+     * In bytes, the size of a native EpollEvent.
+     */
     public static final int SIZE = ( new NativeEpollEvent() ).size() ;
 
 
 
 
+    /**
+     * Basic constructor.
+     */
     public EpollEvent() {
 
         this.nativeStruct = new NativeEpollEvent() ;
     }
 
 
+
+
+    /**
+     * Build an epoll event from a pointer.
+     *
+     * @param ptr  Pointer.
+     */
     public EpollEvent( Pointer ptr ) {
     
         this.nativeStruct = new NativeEpollEvent( ptr ) ;
@@ -32,6 +52,14 @@ public class EpollEvent {
 
 
 
+
+    /**
+     * Selects the type of data the user stores for this event.
+     *
+     * @param dataType  The type of data.
+     *
+     * @return  This EpollEvent.
+     */
     public EpollEvent selectDataType( EpollDataType dataType ) {
 
         this.nativeStruct.data.setType( dataType.fieldType ) ;
@@ -40,12 +68,28 @@ public class EpollEvent {
     }
 
 
+
+
+    /**
+     * Retrieves the flags describing the type of events this EpollEvent is associated with.
+     *
+     * @return  The flags.
+     */
     public int getEvents() {
     
         return this.nativeStruct.events ;
     }
 
 
+
+
+    /**
+     * Sets the flags describing the type of events this EpollEvent responds to.
+     *
+     * @param eventFlags  Which events.
+     *
+     * @return  This EpollEvent.
+     */
     public EpollEvent setEvents( int eventFlags ) {
     
         this.nativeStruct.events = eventFlags ;
@@ -54,12 +98,32 @@ public class EpollEvent {
     }
     
 
+
+
+    /**
+     * Retrieves user data as a 32 bits integer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @return User int.
+     */
     public int getDataInt() {
     
         return this.nativeStruct.data.u32 ;
     }
 
 
+
+
+    /**
+     * Sets user data as a 32 bits integer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @param intValue  New int value.
+     *
+     * @return This EpollEvent.
+     */
     public EpollEvent setDataInt( int intValue ) {
     
         this.nativeStruct.data.u32 = intValue ;
@@ -68,12 +132,32 @@ public class EpollEvent {
     }
 
 
+
+
+    /**
+     * Retrieves user data as a file descriptor.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @return User file descriptor.
+     */
     public int getDataFD() {
     
         return this.nativeStruct.data.fd ;
     }
 
 
+
+
+    /**
+     * Sets user data as a file descriptor.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @param fd  New file descriptor.
+     *
+     * @return  This EpollEvent.
+     */
     public EpollEvent setDataFD( int fd ) {
     
         this.nativeStruct.data.fd = fd ;
@@ -82,11 +166,32 @@ public class EpollEvent {
     }
 
 
+
+
+    /**
+     * Retrieves user data as a 64 bits integer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @return  User long.
+     */
     public long getDataLong() {
     
         return this.nativeStruct.data.u64 ;
     }
 
+
+
+
+    /**
+     * Sets user data as a 64 bits integer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @param longValue  New long value.
+     *
+     * @return  This EpollEvent.
+     */
     public EpollEvent setDataLong( long longValue ) {
     
         this.nativeStruct.data.u64 = longValue ;
@@ -95,12 +200,32 @@ public class EpollEvent {
     }
 
 
+
+
+    /**
+     * Retrieves user data as a pointer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @return  User pointer.
+     */
     public Pointer getDataPointer() {
     
         return this.nativeStruct.data.ptr ;
     }
 
 
+
+
+    /**
+     * Sets user data as a pointer.
+     * <p>
+     * Attention, <code>selectDataType</code> should be called before.
+     *
+     * @param ptr  New user pointer.
+     *
+     * @return  This EpollEvent.
+     */
     public EpollEvent setDataPointer( Pointer ptr ) {
     
         this.nativeStruct.data.ptr = ptr ;

@@ -9,6 +9,11 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 
+/**
+ * This class represents several epoll events continuously allocated in memory.
+ *
+ * @see EpollEvent
+ */
 public class EpollEvents {
 
 
@@ -16,6 +21,13 @@ public class EpollEvents {
     Memory       allocated ;
 
 
+
+
+    /**
+     * Allocate several events in memory.
+     *
+     * @param size  How many events should be allocated.
+     */
     public EpollEvents( int size ) {
     
         this.allocated = new Memory( size * NativeEpollEvent.SIZE ) ;
@@ -31,6 +43,14 @@ public class EpollEvents {
     }
 
 
+
+    /**
+     * Selects the user data type for all events.
+     *
+     * @param type  The user data type.
+     *
+     * @return  This EpollEvents.
+     */
     public EpollEvents selectDataType( EpollDataType type ) {
     
         for ( EpollEvent event : events ) event.nativeStruct.data.setType( type.fieldType ) ;
@@ -39,12 +59,27 @@ public class EpollEvents {
     }
 
 
+
+
+    /**
+     * Gets the event located at <code>index</code>
+     *
+     * @param index  The position of the event.
+     *
+     * @return  The requested EpollEvent.
+     */
     public EpollEvent getEpollEvent( int index ) {
     
         return events[ index ] ;
     }
 
 
+
+    /**
+     * Reads the <code>n</code> first events from the native memory.
+     *
+     * @param n  How many events.
+     */
     void readNFirst( int n ) {
 
         n = Math.min( n             ,

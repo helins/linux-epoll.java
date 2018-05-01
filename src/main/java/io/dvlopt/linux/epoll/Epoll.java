@@ -7,15 +7,23 @@ import com.sun.jna.Pointer               ;
 import com.sun.jna.Structure             ;
 import com.sun.jna.Union                 ;
 import io.dvlopt.linux.LinuxException    ;
-import io.dvlopt.linux.io.LinuxIO        ;
 import io.dvlopt.linux.epoll.EpollEvent  ;
 import io.dvlopt.linux.epoll.EpollEvents ;
+import io.dvlopt.linux.io.LinuxIO        ;
 import java.util.Arrays                  ;
 import java.util.List                    ;
 
 
 
 
+
+/**
+ * API for using epoll.
+ * <p>
+ * It is quite close to the native API but wrapped in a java idiomatic interface.
+ *
+ * @see <a href="http://man7.org/linux/man-pages/man7/epoll.7.html">Epoll man pages</a>
+ */
 public class Epoll implements AutoCloseable {
 
 
@@ -23,6 +31,8 @@ public class Epoll implements AutoCloseable {
     
         Native.register( "c" ) ;
     }
+
+
 
 
     public static final int EPOLLIN      = 0x0001  ; 
@@ -67,6 +77,13 @@ public class Epoll implements AutoCloseable {
     private int epfd ;
 
 
+
+
+    /**
+     * Creates an instance.
+     *
+     * @throws LinuxException   When the instance cannot be allocated.
+     */
     public Epoll() throws LinuxException {
     
         this.epfd = epoll_create( 1 ) ;
@@ -78,6 +95,13 @@ public class Epoll implements AutoCloseable {
     }
 
 
+
+
+    /**
+     * Close this instance.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public void close() throws LinuxException {
 
         if ( LinuxIO.close( this.epfd ) != 0 ) {
@@ -89,6 +113,17 @@ public class Epoll implements AutoCloseable {
 
 
 
+    /**
+     * Adds events to monitor for the given file descriptor.
+     *
+     * @param fd  File descriptor.
+     *
+     * @param event  Describing what events should be monitored and setting user data.
+     *
+     * @return This Epoll instance.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public Epoll add( int        fd    ,
                       EpollEvent event ) throws LinuxException {
 
@@ -109,6 +144,17 @@ public class Epoll implements AutoCloseable {
 
 
 
+    /**
+     * Modifies the events to monitor for the given file descriptor.
+     *
+     * @return  This Epoll instance.
+     *
+     * @param fd  File descriptor.
+     *
+     * @param event  Describing what events should be monitored and setting user data.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public Epoll modify( int        fd    ,
                          EpollEvent event ) throws LinuxException {
 
@@ -128,6 +174,15 @@ public class Epoll implements AutoCloseable {
 
 
 
+    /**
+     * Removes this file descriptor so it is not monitor anymore.
+     *
+     * @param fd  File descriptor.
+     *
+     * @return  This Epoll instance.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public Epoll remove( int fd ) throws LinuxException {
     
         if ( epoll_ctl( this.epfd     ,
@@ -144,6 +199,17 @@ public class Epoll implements AutoCloseable {
 
 
 
+    /**
+     * Waits for an event to happen.
+     *
+     * @param event  An EpollEvent that will be filled when something happens.
+     *
+     * @see wait( EpollEvent, int )
+     *
+     * @return  0 if nothing happened before unblocking, 1 if something did.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public int wait( EpollEvent event ) throws LinuxException {
     
         return this.wait( event ,
@@ -151,6 +217,23 @@ public class Epoll implements AutoCloseable {
     }
 
 
+
+
+    /**
+     * Waits for an event to happen within the given timeout.
+     * <p>
+     * The given EpollEvent will be filled by the kernel to describe the type of
+     * event that happened and write back the user data.
+     *
+     * @param event  An EpollEvent that will be filled when something happens.
+     *
+     * @param timeout  How many milliseconds at least should we wait. A timeout of -1 will block
+     *                 forever until something happens.
+     *
+     * @return  0 if nothing happened before the timeout elapsed, 1 if something did.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public int wait( EpollEvent event   ,
                      int        timeout ) throws LinuxException {
     
@@ -166,6 +249,24 @@ public class Epoll implements AutoCloseable {
     }
 
 
+
+
+    /**
+     * Wait for events to happen (at most the size of <code>events</code>).
+     * <p>
+     * The given EpollEvents will be filled by the kernel to describe the type of
+     * event that happened and write back the user data.
+     *
+     * @param events   EpollEvents that will be filled when something happens.
+     *
+     * @return  Number describing how many events happened before the timeout elapsed.
+     *          This function unblocks as soon as something happens but sometimes, several
+     *          events can happen at once.
+     *
+     * @see  wait( EpollEvents, int )
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public int wait( EpollEvents events ) throws LinuxException {
     
         return this.wait( events ,
@@ -173,6 +274,26 @@ public class Epoll implements AutoCloseable {
     }
 
 
+
+
+    /**
+     * Wait for events to happen (at most the size of <code>events</code>) within the
+     * given timeout.
+     * <p>
+     * The given EpollEvents will be filled by the kernel to describe the type of
+     * event that happened and write back the user data.
+     *
+     * @param events   EpollEvents that will be filled when something happens.
+     *
+     * @param timeout  How many milliseconds at least should we wait. A timeout of -1 will block
+     *                 forever until something happens.
+     *
+     * @return  Number describing how many events happened before the timeout elapsed.
+     *          This function unblocks as soon as something happens but sometimes, several
+     *          events can happen at once.
+     *
+     * @throws LinuxException  In case of failure.
+     */
     public int wait( EpollEvents events  ,
                      int         timeout ) throws LinuxException {
     
@@ -198,6 +319,8 @@ public class Epoll implements AutoCloseable {
                           maxEvents ,
                           -1        ) ;
     }
+
+
 
 
     private int wait( Pointer events    ,

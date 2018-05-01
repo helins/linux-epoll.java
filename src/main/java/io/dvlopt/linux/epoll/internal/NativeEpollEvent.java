@@ -10,6 +10,10 @@ import java.util.List                                 ;
 
 
 
+/**
+ * This class is needed internally to describe a native data structure.
+ * The user should not bother about this.
+ */
 public class NativeEpollEvent extends Structure {
 
 
