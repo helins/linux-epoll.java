@@ -80,7 +80,7 @@ public class Epoll implements AutoCloseable {
 
 
     /**
-     * Creates an instance.
+     * Creates an instance and allocates the needed resources.
      *
      * @throws LinuxException   When the instance cannot be allocated.
      */
@@ -98,7 +98,7 @@ public class Epoll implements AutoCloseable {
 
 
     /**
-     * Close this instance.
+     * Closes this instance and the allocated resources.
      *
      * @throws LinuxException  In case of failure.
      */
@@ -175,7 +175,7 @@ public class Epoll implements AutoCloseable {
 
 
     /**
-     * Removes this file descriptor so it is not monitor anymore.
+     * Removes this file descriptor so it is not monitored anymore.
      *
      * @param fd  File descriptor.
      *

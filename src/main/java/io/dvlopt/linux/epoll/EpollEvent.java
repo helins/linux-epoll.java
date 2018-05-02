@@ -9,9 +9,9 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 /**
- * An EpollEvent specifies the type of event the kernel should monitor, or did respond to, 
+ * An EpollEvent specifies the type of events the kernel should monitor, or did respond to, 
  * and allows the user to store some basic data such as a file descriptor and get it back 
- * later when the even occurs.
+ * later when an event occurs.
  */
 public class EpollEvent {
 
@@ -30,7 +30,7 @@ public class EpollEvent {
 
 
     /**
-     * Basic constructor.
+     * Allocates a new event.
      */
     public EpollEvent() {
 
@@ -41,7 +41,7 @@ public class EpollEvent {
 
 
     /**
-     * Build an epoll event from a pointer.
+     * Builds an event from a pointer.
      *
      * @param ptr  Pointer.
      */
@@ -101,7 +101,7 @@ public class EpollEvent {
 
 
     /**
-     * Retrieves user data as a 32 bits integer.
+     * Retrieves user data as a 32-bit integer.
      * <p>
      * Attention, <code>selectDataType</code> should be called before.
      *
@@ -116,7 +116,7 @@ public class EpollEvent {
 
 
     /**
-     * Sets user data as a 32 bits integer.
+     * Sets user data as a 32-bit integer.
      * <p>
      * Attention, <code>selectDataType</code> should be called before.
      *
@@ -169,7 +169,7 @@ public class EpollEvent {
 
 
     /**
-     * Retrieves user data as a 64 bits integer.
+     * Retrieves user data as a 64-bit integer.
      * <p>
      * Attention, <code>selectDataType</code> should be called before.
      *
@@ -184,7 +184,7 @@ public class EpollEvent {
 
 
     /**
-     * Sets user data as a 64 bits integer.
+     * Sets user data as a 64-bit integer.
      * <p>
      * Attention, <code>selectDataType</code> should be called before.
      *
