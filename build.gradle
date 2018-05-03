@@ -2,7 +2,23 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '2.0.3'
+    id 'com.jfrog.bintray' version '1.7.3'
 }
+
+
+
+
+def globalName    = 'linux-epoll'
+
+def globalVersion = '0.0.0-alpha1'
+
+def globalDesc    = 'Use Linux\'s epoll from java'
+
+def globalUrl     = 'https://github.com/dvlopt/linux-epoll.java'
+
+
+group   = "io.dvlopt"
+version = globalVersion
 
 
 
@@ -16,12 +32,57 @@ dependencies {
 
 
 repositories {
-    maven {
-        url 'https://dl.bintray.com/dvlopt/maven'
+    jcenter()
+}
+
+
+
+
+task sourcesJar( type:      Jar     ,
+                 dependsOn: classes ) {
+
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+
+
+task javadocJar( type:      Jar     ,
+                 dependsOn: javadoc ) {
+
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+
+
+
+def pomConfig = {
+
+    licenses {
+        license {
+            name 'The MIT License'
+            url  'https://mit-license.org/'
+        }
     }
 
 
-    jcenter()
+    developers {
+        developer {
+            name            'Adam Helinski'
+            email           'helinski.adam@outlook.com'
+            organization    'Dvlopt'
+            organizationUrl 'https://github.com/dvlopt'
+        }
+    }
+
+
+    scm {
+        connection          'scm:git:git://github.com/dvlopt/linux-epoll.java.git'
+        developerConnection 'scm:git:ssh://github.com/dvlopt/linux-epoll.java.git'
+        url                 globalUrl
+    }
 }
 
 
@@ -30,7 +91,26 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+
             from components.java
+
+            artifact sourcesJar
+            artifact javadocJar
+            
+            pom.withXml {
+                def root = asNode()
+
+                root.appendNode( 'name'     ,
+                                 globalName )
+
+                root.appendNode( 'description' ,
+                                 globalDesc    )
+
+                root.appendNode( 'url'     ,
+                                 globalUrl )
+
+                root.children().last() + pomConfig
+            }
         }
     }
 }
@@ -38,5 +118,31 @@ publishing {
 
 
 
-group = "dvlopt"
-version = "0.0.0-alpha0"
+bintray {
+    user = project.hasProperty( 'bintrayUser' ) ? project.property( 'bintrayUser' )
+                                                : System.getenv( 'BINTRAY_USER' )
+    key  = project.hasProperty( 'bintrayKey' ) ? project.property( 'bintrayKey' ) 
+                                               : System.getenv( 'BINTRAY_KEY' )
+
+    publications = [ 'mavenJava' ]
+
+    pkg {
+        repo                  = 'maven'
+        name                  = globalName
+        desc                  = globalDesc
+        licenses              = [ 'MIT' ]
+        websiteUrl            = globalUrl
+        vcsUrl                = 'https://github.com/dvlopt/linux-epoll.java.git'
+        labels                = [ 'java', 'jna', 'native', 'linux', 'io', 'epoll' ]
+        publicDownloadNumbers = true
+        
+        version {
+            name   = globalVersion
+            vcsTag = globalVersion
+
+            gpg {
+                sign = true
+            }
+        }
+    }
+}

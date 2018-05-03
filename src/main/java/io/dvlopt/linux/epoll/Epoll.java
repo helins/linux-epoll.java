@@ -127,13 +127,10 @@ public class Epoll implements AutoCloseable {
     public Epoll add( int        fd    ,
                       EpollEvent event ) throws LinuxException {
 
-
-        event.nativeStruct.write() ;
-
-        if ( epoll_ctl( this.epfd                       ,
-                        EPOLL_CTL_ADD                   ,
-                        fd                              ,
-                        event.nativeStruct.getPointer() ) < 0 ) {
+        if ( epoll_ctl( this.epfd     ,
+                        EPOLL_CTL_ADD ,
+                        fd            ,
+                        event.ptr     ) < 0 ) {
         
             throw new LinuxException( "Unable to add epoll event" ) ;
         }
@@ -158,12 +155,10 @@ public class Epoll implements AutoCloseable {
     public Epoll modify( int        fd    ,
                          EpollEvent event ) throws LinuxException {
 
-        event.nativeStruct.write() ;
-    
-        if ( epoll_ctl( this.epfd                       ,
-                        EPOLL_CTL_MOD                   ,
-                        fd                              ,
-                        event.nativeStruct.getPointer() ) < 0 ) {
+        if ( epoll_ctl( this.epfd     ,
+                        EPOLL_CTL_MOD ,
+                        fd            ,
+                        event.ptr     ) < 0 ) {
         
             throw new LinuxException( "Unable to modify epoll event" ) ;
         }
@@ -237,13 +232,11 @@ public class Epoll implements AutoCloseable {
     public int wait( EpollEvent event   ,
                      int        timeout ) throws LinuxException {
     
-        int result = this.wait( event.nativeStruct.getPointer() ,
-                                1                               ,
-                                timeout                         ) ;
+        int result = this.wait( event.ptr ,
+                                1         ,
+                                timeout   ) ;
 
         if ( result < 0 ) throw new LinuxException( "While waiting for an epoll event" ) ;
-
-        event.nativeStruct.read() ;
 
         return result ;
     }
@@ -297,27 +290,13 @@ public class Epoll implements AutoCloseable {
     public int wait( EpollEvents events  ,
                      int         timeout ) throws LinuxException {
     
-        int result = this.wait( events.allocated     ,
+        int result = this.wait( events.memory        ,
                                 events.events.length ,
                                 timeout              ) ;
 
         if ( result < 0 ) throw new LinuxException( "While waiting for an epoll event" ) ;
 
-        events.readNFirst( result ) ;
-
         return result ;
-    }
-
-
-
-
-
-    private int wait( Pointer events    ,
-                      int     maxEvents ) throws LinuxException {
-
-        return this.wait( events    ,
-                          maxEvents ,
-                          -1        ) ;
     }
 
 
