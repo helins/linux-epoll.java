@@ -16,14 +16,14 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 public class EpollEvents {
 
 
-    EpollEvent[] events    ;
+    EpollEvent[] events ;
     Memory       memory ;
 
 
 
 
     /**
-     * Allocate several events in memory.
+     * Allocates several events in memory.
      *
      * @param size  How many events should be allocated.
      */
@@ -45,7 +45,7 @@ public class EpollEvents {
 
 
     /**
-     * Gets the event located at <code>index</code>
+     * Gets the event located at <code>index</code>.
      *
      * @param index  The position of the event.
      *

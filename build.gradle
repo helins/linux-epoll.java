@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-epoll'
 
-def globalVersion = '0.0.0-alpha1'
+def globalVersion = '0.0.0-alpha2'
 
 def globalDesc    = 'Use Linux\'s epoll from java'
 

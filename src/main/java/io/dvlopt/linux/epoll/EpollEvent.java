@@ -3,6 +3,7 @@ package io.dvlopt.linux.epoll ;
 
 import com.sun.jna.Memory                              ;
 import com.sun.jna.Pointer                             ;
+import io.dvlopt.linux.epoll.EpollEventFlags           ;
 import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
@@ -45,9 +46,9 @@ public class EpollEvent {
      *
      * @return  The flags.
      */
-    public int getEvents() {
+    public EpollEventFlags getEventFlags() {
 
-        return this.ptr.getInt( NativeEpollEvent.OFFSET_EVENTS ) ;
+        return new EpollEventFlags( this.ptr.getInt( NativeEpollEvent.OFFSET_EVENTS ) ) ;
     }
 
 
@@ -60,10 +61,10 @@ public class EpollEvent {
      *
      * @return  This EpollEvent.
      */
-    public EpollEvent setEvents( int eventFlags ) {
+    public EpollEvent setEventFlags( EpollEventFlags eventFlags ) {
     
         this.ptr.setInt( NativeEpollEvent.OFFSET_EVENTS ,
-                         eventFlags                     ) ;
+                         eventFlags.flags               ) ;
 
         return this ;
     }
