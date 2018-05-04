@@ -27,7 +27,7 @@ public class EpollEvent {
      */
     public EpollEvent() {
 
-        this.ptr = (Pointer)( new Memory( NativeEpollEvent.SIZE ) ) ;
+        this( new Memory( NativeEpollEvent.SIZE ) );
     }
 
 
@@ -36,6 +36,9 @@ public class EpollEvent {
     EpollEvent( Pointer ptr ) {
 
         this.ptr = ptr ;
+
+        this.unsafeSetEventFlags( 0 ) ;
+        this.setUserData( 0 )         ;
     }
 
 
@@ -62,11 +65,19 @@ public class EpollEvent {
      * @return  This EpollEvent.
      */
     public EpollEvent setEventFlags( EpollEventFlags eventFlags ) {
+
+        this.unsafeSetEventFlags( eventFlags.flags ) ;
+    
+        return this ;
+    }
+
+
+
+
+    private void unsafeSetEventFlags( int flags ) {
     
         this.ptr.setInt( NativeEpollEvent.OFFSET_EVENTS ,
-                         eventFlags.flags               ) ;
-
-        return this ;
+                         flags                          ) ;
     }
     
 
