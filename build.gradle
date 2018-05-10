@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-epoll'
 
-def globalVersion = '0.0.0'
+def globalVersion = '0.0.1'
 
 def globalDesc    = 'Use Linux\'s epoll from java'
 
@@ -24,8 +24,8 @@ version = globalVersion
 
 
 dependencies {
-    api            'io.dvlopt:linux-common:0.0.0'
-    implementation 'io.dvlopt:linux-io:0.0.0'
+    api            'io.dvlopt:linux-common:0.0.1'
+    implementation 'io.dvlopt:linux-io:0.0.1'
 }
 
 
@@ -145,4 +145,12 @@ bintray {
             }
         }
     }
+}
+
+
+
+
+if ( JavaVersion.current() != JavaVersion.VERSION_1_8 ) {
+
+    throw GradleException( "Must be used with Java 8" )
 }
