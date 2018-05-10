@@ -32,6 +32,8 @@ public class EpollEvents {
         this.memory = new Memory( size * NativeEpollEvent.SIZE ) ;
         this.events = new EpollEvent[ size ]                     ;
 
+        this.memory.clear() ;
+
         for ( int i = 0 ;
               i < size  ;
               i += 1    ) {

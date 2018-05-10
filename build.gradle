@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-epoll'
 
-def globalVersion = '0.0.0-alpha3'
+def globalVersion = '0.0.0'
 
 def globalDesc    = 'Use Linux\'s epoll from java'
 
@@ -24,15 +24,15 @@ version = globalVersion
 
 
 dependencies {
-    api            'io.dvlopt:linux-common:0.0.0-alpha2'
-    implementation 'io.dvlopt:linux-io:0.0.0-alpha3'
+    api            'io.dvlopt:linux-common:0.0.0'
+    implementation 'io.dvlopt:linux-io:0.0.0'
 }
 
 
 
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 
@@ -71,9 +71,9 @@ def pomConfig = {
     developers {
         developer {
             name            'Adam Helinski'
-            email           'helinski.adam@outlook.com'
+            email           'adam@dvlopt.io'
             organization    'Dvlopt'
-            organizationUrl 'https://github.com/dvlopt'
+            organizationUrl 'http://dvlopt.io'
         }
     }
 

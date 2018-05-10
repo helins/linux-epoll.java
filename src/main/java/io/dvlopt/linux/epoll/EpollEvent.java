@@ -27,7 +27,11 @@ public class EpollEvent {
      */
     public EpollEvent() {
 
-        this( new Memory( NativeEpollEvent.SIZE ) );
+        Memory memory = new Memory( NativeEpollEvent.SIZE ) ;
+
+        memory.clear() ;
+
+        this.ptr = (Pointer)memory ;
     }
 
 
@@ -36,9 +40,6 @@ public class EpollEvent {
     EpollEvent( Pointer ptr ) {
 
         this.ptr = ptr ;
-
-        this.unsafeSetEventFlags( 0 ) ;
-        this.setUserData( 0 )         ;
     }
 
 
@@ -60,26 +61,18 @@ public class EpollEvent {
     /**
      * Sets the flags describing the type of events this EpollEvent responds to.
      *
-     * @param eventFlags  Which events.
+     * @param flags  Which events.
      *
      * @return  This EpollEvent.
      */
-    public EpollEvent setEventFlags( EpollEventFlags eventFlags ) {
+    public EpollEvent setEventFlags( EpollEventFlags flags ) {
 
-        this.unsafeSetEventFlags( eventFlags.flags ) ;
+        this.ptr.setInt( NativeEpollEvent.OFFSET_EVENTS ,
+                         flags.value                    ) ;
     
         return this ;
     }
 
-
-
-
-    private void unsafeSetEventFlags( int flags ) {
-    
-        this.ptr.setInt( NativeEpollEvent.OFFSET_EVENTS ,
-                         flags                          ) ;
-    }
-    
 
 
 

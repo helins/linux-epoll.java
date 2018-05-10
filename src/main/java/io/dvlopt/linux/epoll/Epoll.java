@@ -290,13 +290,9 @@ public class Epoll implements AutoCloseable {
     public int wait( EpollEvents events  ,
                      int         timeout ) throws LinuxException {
     
-        int result = this.wait( events.memory        ,
-                                events.events.length ,
-                                timeout              ) ;
-
-        if ( result < 0 ) throw new LinuxException( "While waiting for an epoll event" ) ;
-
-        return result ;
+        return this.wait( events.memory        ,
+                          events.events.length ,
+                          timeout              ) ;
     }
 
 

@@ -32,9 +32,9 @@ public class NativeEpollEvent extends Structure {
     
         NativeEpollEvent event = new NativeEpollEvent() ;
 
-        SIZE             = event.size()                    ;
         OFFSET_EVENTS    = event.fieldOffset( "events" )   ;
         OFFSET_USER_DATA = event.fieldOffset( "userData" ) ;
+        SIZE             = event.size()                    ;
     }
 
 

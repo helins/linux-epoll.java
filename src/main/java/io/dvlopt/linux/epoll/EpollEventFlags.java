@@ -14,7 +14,7 @@ import io.dvlopt.linux.epoll.EpollEventFlag ;
 public class EpollEventFlags {
 
 
-    int flags ;
+    int value ;
 
 
 
@@ -24,15 +24,15 @@ public class EpollEventFlags {
      */
     public EpollEventFlags() {
     
-        this.flags = 0 ;
+        this.value = 0 ;
     }
 
 
 
 
-    EpollEventFlags( int flags ) {
+    EpollEventFlags( int value ) {
     
-        this.flags = flags ;
+        this.value = value ;
     }
 
 
@@ -47,7 +47,7 @@ public class EpollEventFlags {
      */
     public boolean isSet( EpollEventFlag flag ) {
     
-        return ( this.flags & flag.value ) > 0 ;
+        return ( this.value & flag.value ) > 0 ;
     }
 
 
@@ -62,7 +62,7 @@ public class EpollEventFlags {
      */
     public EpollEventFlags set( EpollEventFlag flag ) {
     
-        this.flags |= flag.value ;
+        this.value |= flag.value ;
 
         return this ;
     }
@@ -79,7 +79,7 @@ public class EpollEventFlags {
      */
     public EpollEventFlags unset( EpollEventFlag flag ) {
     
-        this.flags &= ~flag.value ;
+        this.value &= ~flag.value ;
 
         return this ;
     }
@@ -94,7 +94,7 @@ public class EpollEventFlags {
      */
     public EpollEventFlags clear() {
     
-        this.flags = 0 ;
+        this.value = 0 ;
 
         return this ;
     }
