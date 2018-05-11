@@ -74,7 +74,8 @@ public class Epoll implements AutoCloseable {
 
 
 
-    private int epfd ;
+    private int     epfd     ;
+    private boolean isClosed ;
 
 
 
@@ -104,9 +105,14 @@ public class Epoll implements AutoCloseable {
      */
     public void close() throws LinuxException {
 
-        if ( LinuxIO.close( this.epfd ) != 0 ) {
-            
-            throw new LinuxException( "Unable to close epoll instance" ) ;
+        if ( this.isClosed == false ) {
+
+            if ( LinuxIO.close( this.epfd ) != 0 ) {
+                
+                throw new LinuxException( "Unable to close epoll instance" ) ;
+            }
+
+            this.isClosed = true ;
         }
     }
 
