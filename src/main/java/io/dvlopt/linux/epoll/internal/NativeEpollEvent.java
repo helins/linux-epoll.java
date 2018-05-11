@@ -10,9 +10,7 @@ import java.util.List        ;
 
 
 /**
- * This class is needed internally to describe a native data structure.
- * The user should not bother about this, this class needs to be public otherwise
- * JNA will complain.
+ * Kept public in order for JNA to work as needed, the user should not bother about it.
  */
 public class NativeEpollEvent extends Structure {
 

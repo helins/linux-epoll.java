@@ -10,9 +10,9 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 /**
- * An EpollEvent specifies the type of events the kernel should monitor, or did respond to, 
- * and allows the user to store some basic data such as a file descriptor and get it back 
- * later when an event occurs.
+ * Class representing the type of events the kernel should monitor and storing some user data.
+ * <p>
+ * The data will be given back by the kernel when an event happens so the user can somehow identify it.
  */
 public class EpollEvent {
 

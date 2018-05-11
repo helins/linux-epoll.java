@@ -60,6 +60,7 @@ task javadocJar( type:      Jar     ,
 
 def pomConfig = {
 
+
     licenses {
         license {
             name 'The MIT License'
@@ -145,6 +146,15 @@ bintray {
             }
         }
     }
+}
+
+
+
+
+javadoc {
+    options.links( 'https://docs.oracle.com/javase/8/docs/api/'             ,
+                   'http://java-native-access.github.io/jna/4.5.1/javadoc/' ,
+                   'https://dvlopt.github.io/doc/java/linux-common/'        )
 }
 
 

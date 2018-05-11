@@ -9,7 +9,7 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 /**
- * This class represents several epoll events continuously allocated in memory.
+ * Class representing several epoll events continuously allocated in memory.
  *
  * @see EpollEvent
  */
@@ -47,7 +47,7 @@ public class EpollEvents {
 
 
     /**
-     * Gets the event located at <code>index</code>.
+     * Gets the epoll event located at `<code>index</code>`.
      *
      * @param index  The position of the event.
      *

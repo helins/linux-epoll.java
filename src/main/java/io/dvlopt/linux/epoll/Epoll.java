@@ -18,7 +18,7 @@ import java.util.List                    ;
 
 
 /**
- * API for using epoll.
+ * Class representing an epoll instance.
  * <p>
  * It is quite close to the native API but wrapped in a java idiomatic interface.
  *
@@ -33,22 +33,6 @@ public class Epoll implements AutoCloseable {
     }
 
 
-
-
-    public static final int EPOLLIN      = 0x0001  ; 
-    public static final int EPOLLPRI     = 0x0002  ;
-    public static final int EPOLLOUT     = 0x0004  ;
-    public static final int EPOLLRDNORM  = 0x0040  ;
-    public static final int EPOLLRDBAND  = 0x0080  ;
-    public static final int EPOLLWRNORM  = 0x0100  ;
-    public static final int EPOLLWRBAND  = 0x0200  ;
-    public static final int EPOLLMSG     = 0x0400  ;
-    public static final int EPOLLERR     = 0x0008  ;
-    public static final int EPOLLHUP     = 0x0010  ;
-    public static final int EPOLLRDHUP   = 0x2000  ;
-    public static final int EPOLLWAKEUP  = 1 << 29 ;
-    public static final int EPOLLONESHOT = 1 << 30 ;
-    public static final int EPOLLT       = 1 << 31 ;
 
 
     private static final int EPOLL_CTL_ADD = 1 ;

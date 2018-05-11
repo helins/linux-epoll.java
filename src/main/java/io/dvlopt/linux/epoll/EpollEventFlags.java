@@ -7,7 +7,7 @@ import io.dvlopt.linux.epoll.EpollEventFlag ;
 
 
 /**
- * A type safe container for event flags.
+ * Class acting as a type safe container for event flags.
  *
  * @see EpollEventFlag
  */
@@ -54,7 +54,7 @@ public class EpollEventFlags {
 
 
     /**
-     * Set the given flag.
+     * Sets the given flag.
      *
      * @param flag  The flag that needs to be set.
      *
@@ -71,7 +71,7 @@ public class EpollEventFlags {
 
 
     /**
-     * Unset the given flag.
+     * Unsets the given flag.
      *
      * @param flag  The flag that needs to be unset.
      *
@@ -88,7 +88,7 @@ public class EpollEventFlags {
 
 
     /**
-     * Clear the event flags.
+     * Clears the event flags.
      * 
      * @return  This EpollEventFlags instance.
      */
