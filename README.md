@@ -4,6 +4,8 @@
 ![Download](https://api.bintray.com/packages/dvlopt/maven/linux-epoll/images/download.svg)
 ](https://bintray.com/dvlopt/maven/linux-epoll/_latestVersion)
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.dvlopt/linux-epoll/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.dvlopt/linux-epoll)
+
 Sometimes, when messing around with java and JNI/JNA, file descriptors need to
 be polled efficiently. This library provides an API for using
 [epoll](https://en.wikipedia.org/wiki/Epoll) on a Linux system.
