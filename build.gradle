@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-epoll'
 
-def globalVersion = '0.0.3'
+def globalVersion = '0.0.4'
 
 def globalDesc    = 'Use Linux\'s epoll from java'
 
@@ -24,8 +24,8 @@ version = globalVersion
 
 
 dependencies {
-    api            'io.dvlopt:linux-common:0.0.2'
-    implementation 'io.dvlopt:linux-io:0.0.2'
+    api            'io.dvlopt:linux-common:0.1.0'
+    implementation 'io.dvlopt:linux-io:0.0.3'
 }
 
 
