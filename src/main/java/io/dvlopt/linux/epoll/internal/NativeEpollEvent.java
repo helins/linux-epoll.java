@@ -32,10 +32,14 @@ import java.util.List        ;
 public class NativeEpollEvent extends Structure {
 
 
+    // Fields of the native structure.
+    //
     public int  events   ;
     public long userData ;
 
 
+    // Offsets of fields in the native structure.
+    //
     public static final int OFFSET_EVENTS    ;
     public static final int OFFSET_USER_DATA ;
     public static final int SIZE             ;
@@ -43,6 +47,8 @@ public class NativeEpollEvent extends Structure {
 
 
 
+    // Retrieves offsets of native fields.
+    //
     static {
     
         NativeEpollEvent event = new NativeEpollEvent() ;
@@ -55,11 +61,15 @@ public class NativeEpollEvent extends Structure {
 
 
 
+    // Public constructor.
+    //
     public NativeEpollEvent() {}
 
 
 
 
+    // Public constructor for instanciating from a pointer.
+    //
     public NativeEpollEvent( Pointer ptr ) {
     
         super( ptr ) ;
@@ -68,6 +78,8 @@ public class NativeEpollEvent extends Structure {
 
 
 
+    // Needed for JNA.
+    //
     protected List< String > getFieldOrder() {
     
         return Arrays.asList( new String[] { "events"   ,

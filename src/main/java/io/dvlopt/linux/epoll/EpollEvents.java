@@ -26,14 +26,19 @@ import io.dvlopt.linux.epoll.internal.NativeEpollEvent ;
 
 
 /**
- * Class representing several epoll events continuously allocated in memory.
+ * Class representing several epoll events meant to be used with <strong>{@link Epoll#wait( EpollEvents ) Epoll#wait}</strong>.
  *
  * @see EpollEvent
  */
 public class EpollEvents {
 
 
+    // Array of instanciated epoll events mapping to native memory.
+    //
     EpollEvent[] events ;
+
+    // Internal pointer to array of native epoll events.
+    //
     Memory       memory ;
 
 
@@ -42,9 +47,18 @@ public class EpollEvents {
     /**
      * Allocates several events in memory.
      *
-     * @param size  How many events should be allocated.
+     * @param  size
+     *           How many events should be allocated.
+     *
+     * @throws IllegalArgumentException
+     *           When <strong>size</strong> is less than 1.
      */
     public EpollEvents( int size ) {
+
+        if ( size < 1 ) {
+        
+            throw new IllegalArgumentException( "The number of epoll events must be >= 1" ) ;
+        }
     
         this.memory = new Memory( size * NativeEpollEvent.SIZE ) ;
         this.events = new EpollEvent[ size ]                     ;
@@ -64,9 +78,10 @@ public class EpollEvents {
 
 
     /**
-     * Gets the epoll event located at `<code>index</code>`.
+     * Gets the epoll event located at `<strong>index</strong>`.
      *
-     * @param index  The position of the event.
+     * @param   index
+     *            The position of the event.
      *
      * @return  The requested EpollEvent.
      */
