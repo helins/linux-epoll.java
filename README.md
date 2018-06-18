@@ -14,7 +14,8 @@ be polled efficiently. This library provides an API for using
 
 Understand the [native API](http://man7.org/linux/man-pages/man7/epoll.7.html).
 
-Read the [javadoc](https://dvlopt.github.io/doc/java/linux-epoll/index.html?overview-summary.html).
+Read the
+[javadoc](https://dvlopt.github.io/doc/java/io.dvlopt/linux-epoll/index.html?overview-summary.html).
 
 ## License
 
