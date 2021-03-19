@@ -11,7 +11,7 @@ def globalName    = "linux-epoll"
 
 def globalVersion = "1.0.1"
 
-def globalDesc    = "Use Linux\"'s epoll from java"
+def globalDesc    = "Use Linux's epoll from Java"
 
 def globalUrl     = "https://github.com/helins/linux-epoll.java"
 

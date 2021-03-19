@@ -1,25 +1,25 @@
-# linux-epoll
+# Linux-Epoll
 
-[
-![Download](https://api.bintray.com/packages/dvlopt/maven/linux-epoll/images/download.svg)
-](https://bintray.com/dvlopt/maven/linux-epoll/_latestVersion)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.dvlopt/linux-epoll/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.dvlopt/linux-epoll)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.helins/linux-epoll/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.helins/linux-epoll)
+
+[![Javadoc](https://javadoc.io/badge2/io.helins/linux-epoll/javadoc.svg)](https://javadoc.io/doc/io.helins/linux-epoll)
 
 Sometimes, when messing around with java and JNI/JNA, file descriptors need to
 be polled efficiently. This library provides an API for using
 [epoll](https://en.wikipedia.org/wiki/Epoll) on a Linux system.
+
 
 ## Usage
 
 Understand the [native API](http://man7.org/linux/man-pages/man7/epoll.7.html).
 
 Read the
-[javadoc](https://dvlopt.github.io/doc/java/io.dvlopt/linux-epoll/index.html?overview-summary.html).
+[javadoc](https://javadoc.io/doc/io.helins/linux-epoll).
+
 
 ## License
 
-Licensed under the [Apache License, Version
-2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
 Copyright © 2018 Adam Helinski
+
+Licensed under the term of the Mozilla Public License 2.0, see LICENSE.
